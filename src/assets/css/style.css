@@ -2,17 +2,44 @@
 html {
   box-sizing: border-box;
 }
+
 *, *:before, *:after {
   box-sizing: inherit;
 }
 
 body {
-  padding: 30px;
+  padding: 0;
+  margin: 0;
   background: #16161D;
   text-align: center;
   
   font-family: sans-serif;
   color: #E1E1E8;
+}
+
+header {
+  margin-bottom: 30px;
+  background: #646483;
+  padding: 0.5em;
+  text-transform: uppercase;
+  box-shadow: 0 5px 8px -2px rgba(0, 0, 0, 0.4);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 110%;
+  color: #FFFFFF;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.75);
+}
+
+footer {
+  margin-top: 60px;
+  margin-bottom: 30px;
+  font-size: 60%;
+}
+
+a {
+  color: #FFF;
 }
 
 canvas {
