@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf8">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <title>Conway's Game of Life</title>
+  </head>
+
+  <body>
+    <!-- TODO: some simple header bar -->
+    <canvas id="canvas" width="500" height="500"></canvas>
+
+    <fieldset>
+      <legend>Info</legend>
+      <label>Period:
+        <output id="periodOutput">0</output>
+    </fieldset>
+
+    <fieldset>
+      <legend>Control</legend>
+      <ul id="controlButtons">
+        <li>
+          <button id="runPauseButton"><span class="pause">Pause</span><span class="run">Run</span></button>      
+        </li>
+        <li>
+          <button id="nextFrameButton">Next frame</button>
+        </li>
+        <li>
+          <button id="resetButton">Reset</button>
+        </li>
+        <li>
+          <button id="editSeedButton">Edit Seed</button>
+        </li>
+      </ul>
+    </fieldset>
+
+    <fieldset>
+      <legend>Settings</legend>
+      <label>
+        <span>Grid size</span>
+        <input id="gridSizeInput" type="number" value="50" max="200" min="10">
+      </label>
+      <label>
+        <span>Period delay (ms)</span>
+        <input id="periodDelayInput" type="number" value="200" max="5000" min="10">
+      </label>
+      <!-- TODO: fix artifacts primarily in edit mode when show grid is off, then re-enable this setting -->
+      <!--<label>
+        Show grid
+        <input id="showGridCheckboxInput" type="checkbox" checked="checked">
+      </label>-->
+      <label>
+        Colorize updates
+        <input id="colorizeUpdatesCheckboxInput" type="checkbox" checked="checked">
+      </label>
+      <button id="settingsUpdateButton">Update</button>
+    </fieldset>
+
+    <!-- The order of these scripts is important, I haven't bothered
+         with a good init system to make it unnecessary yet. -->
+    <script src="assets/js/namespace.js"></script>
+    <script src="assets/js/constants.js"></script>
+    <script src="assets/js/eventdispatcher.js"></script>
+    <script src="assets/js/propertycollection.js"></script>
+    <script src="assets/js/viewmodel.js"></script>
+    <script src="assets/js/ui/gridview.js"></script>
+    <script src="assets/js/transforms/gameoflifetransform.js"></script>
+    <script src="assets/js/viewcontroller.js"></script>
+    <script src="assets/js/bootstrap.js"></script>
+  </body>
+</html>
