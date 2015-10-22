@@ -2,7 +2,7 @@
 
 This is an implementation of [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway's_Game_of_Life), which I threw together mostly on a Sunday afternoon. 
 
-[Link to live version upcoming]
+Check it out at [gol.michd.me](http://gol.michd.me)!
 
 Some of the code structure and ideas may look familiar if you're used to working with C# as I am, in daily programming. It's certainly a nice language. The goal in my architectural decisions was to have a proper separation of concerns. It vaguely follows the MVC (model view controller)  pattern.
 
