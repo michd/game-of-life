@@ -17,12 +17,12 @@ The actual algorithm implementing Conway's 4 rules lives in its own files, and i
 - Configurable delay between periods
 - Configurable grid size (number of cells to a side of a square, max 200x200)
 - Colorised updates indicating cells that have just become alive or died (toggle-able)
+- Sharing grid seeds via URL (yay!)
 
 ## Future ideas
 
 These are in order of how much I want to do them (first = do first)
 
-- Sharing of seed grids via URL (this will be really cool)
 - Better editing (click and drag to draw several cell states)
 - Toggle-able gridlines (This is already in code, but disabled/hidden because of artifacting issues)
 - Ability to set size to some non-square size
