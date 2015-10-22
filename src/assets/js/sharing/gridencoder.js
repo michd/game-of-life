@@ -1,4 +1,50 @@
 (function (GOL, btoa, atob) {
+  // Right, this file is likely going to remain the most complicated one in the
+  // project, so I'll do my best to explain it here.
+  //
+  // The purpose is to encode the data in the seed grid into a compact string,
+  // which can be put in the url hash.
+  //
+  // The grid is scanned column by column. I think I messed up variable naming
+  // in the entire project as x seems to be the vertical axis.
+  // TODO: fix coordinate system in gridView so X is actually X.
+  //
+  // That aside. The grid is scanned column by column. If a column is devoid
+  // of live cells, no data is kept for it.
+  //
+  // If a column has cells that are alive:
+  // The series of boolean values is considered as a binary number. This big
+  // binary number (depending on grid size) is divided into bytes (8 bits).
+  // The remainder is also considered a byte, but will as a result never reach
+  // the maximum numerical value of 255.
+  //
+  // Consider a grid size of 20 x 20; the will be 20 bits in a column. This will
+  // result in 3 bytes: 8 + 8 + 4 (and some wasted space).
+  // At this point we have 3 number values representing this column.
+  // These numbers are converted to ascii characters, because they only take
+  // up a single character in a string each.
+  //
+  // So what we have at this point, once we encounter a column with any live
+  // cells in it, and if the column is 20 cells tall: a string consisting of 3
+  // characters.
+  //
+  // We generate a string like this for every column with live cells, but prefix
+  // this string with the column index, so we know column the data is for.
+  // 
+  // The column index itself is base-36 encoded, also to save character space.
+  // It is separated from the cell data with a delimiter character not found
+  // in the cellular data itself(LINE_NO_DELIMITER)
+  //
+  // After we have all the columns that contain data covered, these chunks
+  // are joined together with the delimiter LINE_DELIMITER.
+  //
+  // Then we let base64Encode loose on it, which makes it ready for use in a
+  // url.
+  //
+  // Decode does the opposite.
+  //
+  // My apologies if the code is hard to follow.
+
   // We're encoding data into ascii (1-256), so anything inside that range
   // cannot be used as a delimiter
   // Because of the way utf8 is encoded to base64, we're not using something
