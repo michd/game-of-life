@@ -164,6 +164,18 @@
       return seedGrid[x][y];
     }
 
+    // Public
+    function getSeedGrid() {
+      return seedGrid;
+    }
+
+    // Public
+    function setSeedGrid(newSeedGrid) {
+      seedGrid = newSeedGrid;
+      grid = newSeedGrid;
+      seedGridChanged = true;
+    }
+
     // Private
     function buildDefaultSeedGrid() {
       var x, y, i,
@@ -250,6 +262,8 @@
     this.setGrid = setGrid;
     this.toggleSeedGridCell = toggleSeedGridCell;
     this.getSeedGridCell = getSeedGridCell;
+    this.getSeedGrid = getSeedGrid;
+    this.setSeedGrid = setSeedGrid;
 
     constructor();
   }

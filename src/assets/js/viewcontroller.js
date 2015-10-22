@@ -2,7 +2,8 @@
     GOL,
     ViewModel,
     GridView,
-    gameOfLifeTransform) {
+    gameOfLifeTransform,
+    gridEncoder) {
   function ViewController(rootNode) {
     var vm,
         periodOutput,
@@ -15,6 +16,9 @@
         showGridCheckboxInput,
         colorizeUpdatesCheckboxInput,
         settingsUpdateButton,
+        shareSeedButton,
+        shareUrlContainerLabel,
+        shareUrlTextarea;
 
         gridView = new GridView($('canvas')),
         transform = gameOfLifeTransform;
@@ -29,7 +33,10 @@
       periodDelayInput = $('periodDelayInput');
       //showGridCheckboxInput = $('showGridCheckboxInput');
       colorizeUpdatesCheckboxInput = $('colorizeUpdatesCheckboxInput');
-      settingsUpdateButton = $('settingsUpdateButton');
+      settingsUpdateButton = $('settingsUpdateButton'),
+      shareSeedButton = $('shareSeedButton'),
+      shareUrlContainerLabel = $('shareUrlContainerLabel'),
+      shareUrlTextarea = $('shareUrlTextarea'),
 
       gridView = new GridView($('canvas'));
 
@@ -76,8 +83,31 @@
           }, 500);
         });
 
+      shareSeedButton.addEventListener("click", function () {
+        var seedGrid = vm.getSeedGrid(),
+            w = vm.get("gridSize"),
+            h = w,
+            encodedGrid = gridEncoder.encode(seedGrid, w, h);
+
+        shareUrlTextarea.value = [
+          window.location.protocol,
+          "//",
+          window.location.host,
+          window.location.pathname,
+          "#",
+          encodedGrid].join('');
+        shareUrlContainerLabel.setAttribute("class", "");
+
+        shareUrlTextarea.focus();
+        shareUrlTextarea.select();
+      });
+
+      if (window.location.hash !== "") {
+        loadGridFromHash();
+      }
+
       gridView.updateGrid(null, vm.getGrid(), vm.get("showGrid"));
-      gridView.subscribe(GridView.EVENT_CELL_CLICKED, gridViewOnCellClicked);    
+      gridView.subscribe(GridView.EVENT_CELL_CLICKED, gridViewOnCellClicked);
     }
 
     function viewModelOnPropertyChanged(args) {
@@ -132,7 +162,9 @@
     }
 
     function gridViewOnCellClicked(cellCoords) {
-      vm.toggleSeedGridCell(cellCoords.x, cellCoords.y)
+      shareUrlContainerLabel.setAttribute("class", "hidden");
+
+      vm.toggleSeedGridCell(cellCoords.x, cellCoords.y);
       gridView.toggleCell(
           cellCoords.x,
           cellCoords.y,
@@ -144,6 +176,20 @@
       return rootNode.getElementById(id);
     }
 
+    function loadGridFromHash() {
+      var encodedGrid = window.location.hash.slice(1),
+          gridInfo;
+
+      if (encodedGrid.length === 0) return;
+
+      gridInfo = gridEncoder.decode(encodedGrid);
+
+      vm.set("gridSize", gridInfo.width);
+      vm.setSeedGrid(gridInfo.grid);
+
+      gridView.updateGrid(null, vm.getGrid(), vm.get("showGrid"));
+    }
+
     constructor();
   }
 
@@ -153,4 +199,5 @@
     window.GOL,
     window.GOL.ViewModel,
     window.GOL.ui.GridView,
-    window.GOL.transforms.gameOfLifeTransform));
+    window.GOL.transforms.gameOfLifeTransform,
+    window.GOL.sharing.gridEncoder));

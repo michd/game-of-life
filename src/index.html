@@ -21,7 +21,7 @@
 
     <fieldset>
       <legend>Control</legend>
-      <ul id="controlButtons">
+      <ul class="controlButtons">
         <li>
           <button id="runPauseButton"><span class="pause">Pause</span><span class="run">Run</span></button>      
         </li>
@@ -57,6 +57,19 @@
         <input id="colorizeUpdatesCheckboxInput" type="checkbox" checked="checked">
       </label>
       <button id="settingsUpdateButton">Update</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>Share</legend>
+      <ul class="controlButtons">
+        <li>
+          <button id="shareSeedButton">Share Seed</button>
+        </li>
+      </ul>
+      <label id="shareUrlContainerLabel" class="hidden">
+        <span>URL to Share</span>
+        <textarea id="shareUrlTextarea" readonly></textarea>
+      </label>
     </fieldset>
 
     <footer>

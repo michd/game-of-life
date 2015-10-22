@@ -98,8 +98,23 @@ label {
   font-size: 80%;
 }
 
-label span {    
+label span {
   padding-right: 1em;
+}
+
+label textarea {
+  display: block;
+  width: 100%;
+  height: 3em;
+  font-size: 150%;
+  border-radius: 0;
+  border: none;
+  margin-top: 1em;
+  padding: 0.25em;
+}
+
+label.hidden {
+  display: none;
 }
 
 input[type=checkbox] {
@@ -124,22 +139,22 @@ button:hover, button:focus {
   background: #E1E1E8;
 }
 
-#controlButtons {
+.controlButtons {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
 
-#controlButtons button {
+.controlButtons button {
   margin: 0;
 }
 
-#controlButtons li {
+.controlButtons li {
   display: inline-block;  
   margin-left: 10px;  
 }
 
-#controlButtons li:first-child {
+.controlButtons li:first-child {
   margin-left: 0;
 }
 
