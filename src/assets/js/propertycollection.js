@@ -52,7 +52,7 @@
 
     // Public
     function unsubscribe(listener) {
-      eventDispatchers.unsubscribe(PROPERTY_CHANGED_EVENT_NAME, listener);
+      eventDispatcher.unsubscribe(PROPERTY_CHANGED_EVENT_NAME, listener);
     }
 
     this.propertyChanged = propertyChanged;
